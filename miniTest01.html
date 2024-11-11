@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MiniTest</title>
+</head>
+<body>
+<!-- Assignment 01 -->
+<label for="quantityEl">Enter Quantity Electricity: <input type="number" id="quantityEl"></label>
+<button type="button" onclick="calculateElectricityBill()">Submit</button>
+<p id="resultElectricity"></p>
+
+<!-- Assignment 02 -->
+<label for="year">Enter Year: <input type="number" id="year"></label>
+<button type="button" onclick="leapYear()">Submit</button>
+<p id="resultYear"></p>
+
+<!-- Assignment 02 -->
+<label for="a">Enter A: <input type="number" id="a"></label> <br>
+<label for="b">Enter B: <input type="number" id="b"></label> <br>
+<label for="c">Enter C: <input type="number" id="c"></label> <br>
+<label>Triangle:</label><button type="button" onclick="triangulationTest()">Submit</button>
+<p id="triangulation"></p>
+<p id="isoscelesTriangleTest"></p>
+<p id="equilateralTriangleTest"></p>
+<p id="rightTriangleTest"></p>
+
+<script>
+  // Assignment 01 - monthly electricity consumption
+  function calculateElectricityBill() {
+    let quantityElectricity = parseInt(document.getElementById("quantityEl").value);
+    let m1 = 1893, m2 = 1956, m3 = 2271, m4 = 2860, m5 = 3197, m6 = 3302;
+    let result;
+    if (quantityElectricity <= 0) {
+      document.write("Invalid Value");
+    }else {
+      if (quantityElectricity <= 50) {
+        // m1
+        result = quantityElectricity * m1;
+      }else if (quantityElectricity <= 100){
+        // m2
+        result = (50 * m1) + (quantityElectricity - 50) * m2;
+      }else if (quantityElectricity <= 200){
+        // m3
+        result = (50 * m1) + (50 * m2) + (quantityElectricity - 50 - 50) * m3;
+      }else if (quantityElectricity <= 300) {
+        // m4
+        result = (50 * m1) +(50 * m2) + (100 * m3) + (quantityElectricity - 50 - 50 - 100) * m4;
+      }else if (quantityElectricity <= 400) {
+        // m5
+        result = (50 * m1) +(50 * m2) + (100 * m3) + (100 * m4) + (quantityElectricity - 50 - 50 - 100 - 100) * m5;
+      }else {
+        // m6
+        result = (50 * m1) +(50 * m2) + (100 * m3) + (100 * m4) + (100 * m5) + (quantityElectricity - 50 - 50 - 100 - 100 - 100) * m6;
+      }
+    }
+    document.getElementById("resultElectricity").innerHTML = "Result = " + result;
+  }
+
+  // Assignment 02 - Leap Year
+  function leapYear() {
+    let year = parseInt(document.getElementById("year").value);
+    let result;
+    if (year % 4 === 0) {
+      if (year % 100 === 0) {
+        if (year % 400 === 0) {
+          result = year + " is a leap year";
+        } else {
+          result = year + " is NOT a leap year";
+        }
+      } else {
+         result = year + " is a leap year";}
+    } else {
+      result = year + " is not a leap year";
+    }
+    document.getElementById("resultYear").innerHTML = "Result = " + result;
+ }
+
+  // Assignment 03 - triangle
+  function triangulationTest () {
+    let a = parseInt(document.getElementById("a").value);
+    let b = parseInt(document.getElementById("b").value);
+    let c = parseInt(document.getElementById("c").value);
+    if (!(a > 0 || b > 0 || c > 0)) {
+      document.getElementById("triangulation").innerHTML = "Result: 3 sides a, b, c are a triangle!";
+    }else {
+      if ( (a + b ) > c || (b + c) > a || (c + a) > b){
+        document.getElementById("triangulation").innerHTML = "Result: 3 sides a, b, c are a triangle!";
+        // isoscelesTriangle
+        if (a === c && a === b || b === c && b === c || c === a && c === b){
+          document.getElementById("isoscelesTriangleTest").innerHTML = "Result: 3 sides a, b, c are a isosceles triangle!";
+        }else {
+          document.getElementById("isoscelesTriangleTest").innerHTML = "Result: 3 sides a, b, c are not a isosceles triangle!";
+        }
+        // equilateralTriangle
+        if (a === b && b === c && c === a){
+          document.getElementById("equilateralTriangleTest").innerHTML = "Result: 3 sides a, b, c are a equilateral triangle!";
+        }else {
+          document.getElementById("equilateralTriangleTest").innerHTML = "Result: 3 sides a, b, c are not a equilateral triangle!";
+        }
+        // rightTriangleTest
+        if ((a * a + b * b === c * c) || (b * b + c * c === a * a) || (c * c + a * a === b * b)) {
+          document.getElementById("rightTriangleTest").innerHTML = "Result: 3 sides a, b, c are a right triangle!";
+        }else {
+          document.getElementById("rightTriangleTest").innerHTML = "Result: 3 sides a, b, c are not a right triangle!";
+        }
+      }else {
+        document.getElementById("triangulation").innerHTML = "Result: 3 sides a, b, c are not a triangle!";
+      }
+    }
+  }
+
+</script>
+</body>
+</html>
